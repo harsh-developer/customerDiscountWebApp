@@ -1,0 +1,23 @@
+{
+  "name": "customerdiscountwebapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harsh-developer/customerDiscountWebApp.git"
+  },
+  "author": "harsh-developer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harsh-developer/customerDiscountWebApp/issues"
+  },
+  "homepage": "https://github.com/harsh-developer/customerDiscountWebApp#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^6.8.2"
+  }
+}

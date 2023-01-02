@@ -1,0 +1,32 @@
+const mongoose = require("mongoose");
+
+const customerSchema = new mongoose.schema(
+  {
+    firstName: {
+      type: String,
+      require: true,
+      trim: true,
+    },
+    lastName: {
+      type: String,
+      require: true,
+      trim: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    category: {
+      type: String,
+      default: "regular",
+    },
+    totalOrder: {
+      type: Number,
+      default: 0,
+    },
+  },
+  { timestamps: true }
+);
+
+module.exports = mongoose.model("customer", customerSchema);
