@@ -54,7 +54,7 @@ const registerCustomer = async (req, res) => {
 const getCustomers = async (req, res) => {
   try {
     let customers = await customerModel.find();
-    
+
     return res.status(200).send({ status: true, data: customers });
   } catch (err) {
     return res.status(500).send({ status: false, msg: err.message });
