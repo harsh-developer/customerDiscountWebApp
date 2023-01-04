@@ -20,6 +20,7 @@ const customerSchema = new mongoose.Schema(
     category: {
       type: String,
       default: "regular",
+      enum: ["regular", "gold", "diamond"]
     },
     totalOrder: {
       type: Number,

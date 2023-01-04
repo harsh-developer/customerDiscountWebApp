@@ -12,9 +12,11 @@ const registerCustomer = async (req, res) => {
   try {
     let customerDetails = req.body;
     let { firstName, lastName, phone, category, totalOrder } = customerDetails;
+
     if (!firstName) {
       return res.status(400).send({ status: false, msg: "name is required" });
     }
+
     if (!isValidString(firstName)) {
       return res
         .status(400)
@@ -24,6 +26,7 @@ const registerCustomer = async (req, res) => {
     if (!lastName) {
       return res.status(400).send({ status: false, msg: "name is required" });
     }
+
     if (!isValidString(lastName)) {
       return res
         .status(400)
@@ -33,6 +36,7 @@ const registerCustomer = async (req, res) => {
     if (!phone) {
       return res.status(400).send({ status: false, msg: "phone is requird" });
     }
+
     if (!phoneRegex.test(phone)) {
       return res
         .status(400)
@@ -40,6 +44,7 @@ const registerCustomer = async (req, res) => {
     }
 
     let createdData = await customerModel.create(customerDetails);
+
     return res.status(201).send({ status: true, data: createdData });
   } catch (err) {
     res.status(500).send({ status: false, msg: err.message });
@@ -49,6 +54,7 @@ const registerCustomer = async (req, res) => {
 const getCustomers = async (req, res) => {
   try {
     let customers = await customerModel.find();
+    
     return res.status(200).send({ status: true, data: customers });
   } catch (err) {
     return res.status(500).send({ status: false, msg: err.message });
