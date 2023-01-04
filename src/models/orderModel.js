@@ -16,7 +16,7 @@ const orderSchema = new mongoose.Schema(
       require: true,
     },
     discount: {
-      type: Number,
+      type: String,
       default: 0,
     },
   },

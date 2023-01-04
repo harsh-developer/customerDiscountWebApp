@@ -29,22 +29,40 @@ const orderDetails = async (req, res) => {
         .status(400)
         .send({ status: false, msg: "Please enter product price!" });
     }
-    let makeOrder = await orderModel.create(productDetails);
     let incrementOrderCount = await customerModel.findOneAndUpdate(
       { _id: customerId },
       { $inc: { totalOrder: +1 } }
     );
-    let orderCountCheck = await customerModel.findById(customerId)
-    let {orderCount, ...rest} = orderCountCheck;
-    if(orderCount > 10){
-      let upgradeCategory = await customerModel.findOneAndUpdate({_id: customerId}, {$set: {category: "gold"}})
+    let orderCountCheck = await customerModel.findById(customerId);
+    let { totalOrder, ...rest } = orderCountCheck;
+    if (totalOrder > 10) {
+      let upgradeCategory = await customerModel.findOneAndUpdate(
+        { _id: customerId },
+        { $set: { category: "gold" } }
+      );
     }
-    if(orderCount > 20){{
-      upgradeCategory = await customerModel.findOneAndUpdate({_id: customerId}, {$set: {category: "diamond"}})
+    if (totalOrder > 20) {
+      {
+        upgradeCategory = await customerModel.findOneAndUpdate(
+          { _id: customerId },
+          { $set: { category: "diamond" } }
+        );
+      }
     }
-    
+    let checkCategory = await customerModel.findById(customerId);
+    let { category, ...restFields } = checkCategory;
+    if (category == "gold") {
+      productDetails.discount = "10%";
     }
-    return res.status(201).send({ status: true, data: makeOrder });
+    if (category == "diamond") {
+      productDetails.discount = "20%";
+    }
+    let makeOrder = await orderModel.create(productDetails);
+    return res.status(201).send({
+      status: true,
+      data: makeOrder,
+      msg: "If you got discount this can be used on your next order!",
+    });
   } catch (err) {
     res.status(500).send({ status: false, msg: err.message });
   }
