@@ -34,6 +34,16 @@ const orderDetails = async (req, res) => {
       { _id: customerId },
       { $inc: { totalOrder: +1 } }
     );
+    let orderCountCheck = await customerModel.findById(customerId)
+    let {orderCount, ...rest} = orderCountCheck;
+    if(orderCount > 10){
+      let upgradeCategory = await customerModel.findOneAndUpdate({_id: customerId}, {$set: {category: "gold"}})
+    }
+    if(orderCount > 20){{
+      upgradeCategory = await customerModel.findOneAndUpdate({_id: customerId}, {$set: {category: "diamond"}})
+    }
+    
+    }
     return res.status(201).send({ status: true, data: makeOrder });
   } catch (err) {
     res.status(500).send({ status: false, msg: err.message });

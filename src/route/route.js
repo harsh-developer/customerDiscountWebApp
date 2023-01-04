@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { registerCustomer } = require("../controller/customerController");
+const {
+  registerCustomer,
+  getCustomers,
+} = require("../controller/customerController");
 const { orderDetails } = require("../controller/orderController");
 
 router.get("/testAPI", function (req, res) {
@@ -8,6 +11,8 @@ router.get("/testAPI", function (req, res) {
 });
 
 router.post("/register", registerCustomer);
+
+router.get("/customer", getCustomers);
 
 router.post("/placeorder/:id", orderDetails);
 
